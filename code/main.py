@@ -1,13 +1,11 @@
 import time
 
 from pynput import keyboard
-# from rich.color import Color #noqa: F401
 from rich.live import Live
-# from rich.style import Style #noqa: F401
-# from rich.live import refresh #noqa: F401
 from rich.text import Text
 
-# from random import randint #noqa: F401
+# from rich.color import Color #noqa: F401
+# from rich.style import Style #noqa: F401
 
 text = Text("Hello World!")
 with Live(text, auto_refresh=False) as live:
