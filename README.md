@@ -1,4 +1,59 @@
-# Python Discord Code Jam Repository Template
+# Python Discord Code Jam Sleek Snails
+
+## Setup Dev enviroment
+
+#### Download Repository & Switch into directory
+```shell
+$ git clone https://github.com/Sleek-Snails/Snail-Snacks.git
+$ cd Snail-Snacks
+```
+
+#### Installing/Updating virtualenv
+```shell
+$ pip install virtualenv
+```
+
+#### Creating the environment
+Create a virtual environment in the folder `.venv`.
+```shell
+$ python -m venv .venv
+```
+
+#### Enter the environment
+It will change based on your operating system and shell.
+```shell
+#MacOS, zsh
+$ source .venv/bin/activate
+# Linux, Bash
+$ source .venv/bin/activate
+# Linux, Fish
+$ source .venv/bin/activate.fish
+# Linux, Csh
+$ source .venv/bin/activate.csh
+# Linux, PowerShell Core
+$ .venv/bin/Activate.ps1
+# Windows, cmd.exe
+> .venv\Scripts\activate.bat
+# Windows, PowerShell
+> .venv\Scripts\Activate.ps1
+```
+
+#### Installing the Dependencies
+Once the environment is created and activated, use this command to install the development dependencies.
+```shell
+$ pip install -r dev-requirements.txt
+```
+
+#### Enable pre-commit hook
+```shell
+$ pre-commit install
+```
+
+#### Exiting the environment
+Interestingly enough, it is the same for every platform
+```shell
+$ deactivate
+```
 
 ## A Primer
 Hello code jam participants! We've put together this repository template for you to use in [our code jams](https://pythondiscord.com/events/) or even other Python events!
