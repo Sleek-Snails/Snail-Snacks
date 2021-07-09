@@ -22,7 +22,7 @@ $ python -m venv .venv
 #### Enter the environment
 It will change based on your operating system and shell.
 ```shell
-#MacOS, zsh
+# MacOS, zsh
 $ source .venv/bin/activate
 # Linux, Bash
 $ source .venv/bin/activate
@@ -55,6 +55,8 @@ Interestingly enough, it is the same for every platform
 $ deactivate
 ```
 
+## Lint Stuff
+
 ### flake8: general style rules
 
 Our first and probably most important tool is flake8. It will run a set of plugins on your codebase and warn you about any non-conforming lines.
@@ -84,8 +86,6 @@ will pass linting. Although we do not recommend ignoring errors unless you have 
 
 It is run by calling `flake8` in the project root.
 
-
-### Lint Stuff
 
 #### Plugin List:
 
