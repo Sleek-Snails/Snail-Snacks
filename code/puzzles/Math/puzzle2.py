@@ -7,6 +7,7 @@ from rich.panel import Panel
 
 # from rich.prompt import Prompt
 
+
 num1 = randint(1, 10)
 num2 = randint(1, 10)
 num3 = randint(1, 10)
@@ -19,7 +20,6 @@ if num4 == 1:
         Panel(f"What is {num1} / {num2}?"),
         Panel(f"A - {ans}", style="on blue"),
         Panel(f"B - {wro}", style="on red")
-
     )
 
 if num4 == 2:
@@ -27,7 +27,6 @@ if num4 == 2:
         Panel(f"What is {num1} / {num2}?"),
         Panel(f"A - {wro}", style="on blue"),
         Panel(f"B - {ans}", style="on red")
-
     )
 
 print(Panel(panel_group))
@@ -44,11 +43,14 @@ def on_release(key: keyboard) -> bool:
         if num4 == 1:
             if key.char == 'a':
                 return False
+
             if key.char == 'b':
                 print("Wrong!")
+
         if num4 == 2:
             if key.char == 'a':
                 print("Wrong!")
+
             if key.char == 'b':
                 return False
 
