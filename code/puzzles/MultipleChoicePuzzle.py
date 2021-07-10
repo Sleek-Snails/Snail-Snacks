@@ -1,7 +1,13 @@
-import rich  # noqa: F401
+# Local Imports
+from puzzles.Puzzle import Puzzle
+# Library Imports
+from rich import print
+from rich.console import RenderGroup
+from rich.panel import Panel
+from utils.KeyHandler import KeyHandler
 
 
-class MultipleChoicePuzzle:
+class MultipleChoicePuzzle(Puzzle):
     """Multiple Choice Question Class"""
 
     def __init__(self,
@@ -12,12 +18,37 @@ class MultipleChoicePuzzle:
         self.options = options  # List of possible options
         self.answer = answer  # Index of answer in options
 
-    def showPuzzle(self) -> bool:
+    def startPuzzle(self) -> bool:
         """Displays and runs puzzle"""
-        print(f"question: {self.question}, options: {self.options}, answer: {self.answer}")
+        panel_group = RenderGroup(
+            Panel(f"{self.question}"),
+            Panel(f"A - {self.options[0]}", style="on blue"),
+            Panel(f"B - {self.options[1]}", style="on red")
+        )
+        print(panel_group)
 
-        # TODO: Write display logic
-        # * Show Question
-        # * Show timer (using rich progress bar)
+        thisHere = KeyHandler(self._checkTrue)
+        thisHere.enable()
+        # print(f"question: {self.question}, options: {self.options}, answer: {self.answer}")
 
         return True  # Return true if user passed, return false if user failed
+
+    def _checkTrue(self, key: str) -> bool:
+        if self.answer == 0:
+            print("test")
+            if key == 'a':
+                print('h')
+                return False
+
+            if key == 'b':
+                print("Wrong!")
+                return True
+
+        if self.answer == 1:
+            if key == 'a':
+                print('j')
+                print("Wrong!")
+                return True
+
+            if key == 'b':
+                return False
