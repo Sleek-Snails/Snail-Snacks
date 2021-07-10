@@ -13,7 +13,7 @@ class Puzzle:
 
         self.displayCase = Layout()
 
-    def showTimer(self) -> bool:
+    def startTimer(self) -> bool:
         """Shows rich progress bar for timerLength seconds."""
         if self.timer:
             for n in track(range(self.timerLength), description="Timer"):

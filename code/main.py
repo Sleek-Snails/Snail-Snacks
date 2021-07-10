@@ -1,11 +1,13 @@
 import time
 
+# from puzzles.Puzzle import Puzzle
 from pynput import keyboard
 from rich.live import Live
 from rich.text import Text
 
 # from rich.color import Color #noqa: F401
 # from rich.style import Style #noqa: F401
+
 
 text = Text("Hello World!")
 with Live(text, auto_refresh=False) as live:
