@@ -31,6 +31,7 @@ with Live(text, auto_refresh=False) as live:
         if key == keyboard.Key.esc:
             # Stop listener
             return False
+            quit()
 
     listener = keyboard.Listener(
         on_press=on_press,
