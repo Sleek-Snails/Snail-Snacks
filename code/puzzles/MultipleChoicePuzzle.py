@@ -17,6 +17,7 @@ class MultipleChoicePuzzle(Puzzle):
         self.question = question  # Question
         self.options = options  # List of possible options
         self.answer = answer  # Index of answer in options
+        self.passed = None
 
     def startPuzzle(self) -> bool:
         """Displays and runs puzzle"""
@@ -27,28 +28,35 @@ class MultipleChoicePuzzle(Puzzle):
         )
         print(panel_group)
 
-        thisHere = KeyHandler(self._checkTrue)
-        thisHere.enable()
+        self.thisHere = KeyHandler(self._checkTrue)
+        self.thisHere.enable()
         # print(f"question: {self.question}, options: {self.options}, answer: {self.answer}")
 
-        return True  # Return true if user passed, return false if user failed
+        # TODO: Show Timer
+        if self.passed is (True or False):
+            return self.passed  # Return true if user passed, return false if user failed
 
     def _checkTrue(self, key: str) -> bool:
         if self.answer == 0:
-            print("test")
             if key == 'a':
-                print('h')
+                self.passed = True
+                self.thisHere.disable()
                 return False
 
             if key == 'b':
                 print("Wrong!")
+                self.passed = False
+                self.thisHere.disable()
                 return True
 
         if self.answer == 1:
             if key == 'a':
-                print('j')
                 print("Wrong!")
+                self.passed = False
+                self.thisHere.disable()
                 return True
 
             if key == 'b':
+                self.passed = True
+                self.thisHere.disable()
                 return False

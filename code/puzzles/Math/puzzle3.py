@@ -2,9 +2,9 @@ from random import randint
 
 from puzzles.MultipleChoicePuzzle import MultipleChoicePuzzle
 
-num1 = randint(0, 10)
-num2 = randint(0, 10)
-num3 = randint(0, 10)
+num1 = randint(1, 10)
+num2 = randint(1, 10)
+num3 = randint(1, 10)
 num4 = randint(0, 1)
 ans = num1 - num2
 wro = num1 - num3
