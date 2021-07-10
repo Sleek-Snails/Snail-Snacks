@@ -1,10 +1,17 @@
-# Local Imports
-from puzzles.Puzzle import Puzzle
-# Library Imports
-from rich import print
-from rich.console import RenderGroup
-from rich.panel import Panel
-from utils.KeyHandler import KeyHandler
+import inspect
+import os
+import sys
+
+# Horrible Hack for local imports :|
+current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir)
+
+from puzzles.Puzzle import Puzzle  # noqa: E402
+from rich import print  # noqa: E402
+from rich.console import RenderGroup  # noqa: E402
+from rich.panel import Panel  # noqa: E402
+from utils.KeyHandler import KeyHandler  # noqa: E402
 
 
 class MultipleChoicePuzzle(Puzzle):
@@ -44,14 +51,12 @@ class MultipleChoicePuzzle(Puzzle):
                 return False
 
             if key == 'b':
-                print("Wrong!")
                 self.passed = False
                 self.thisHere.disable()
                 return True
 
         if self.answer == 1:
             if key == 'a':
-                print("Wrong!")
                 self.passed = False
                 self.thisHere.disable()
                 return True

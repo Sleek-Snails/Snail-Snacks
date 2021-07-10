@@ -1,0 +1,9 @@
+{
+	"type": "MultipleChoicePuzzle",
+	"question": {
+		"name": "This is a question? {}",
+		"options": ["randNum1*randNum2", "randNum1*randNum3"], //Custom Fields randNumN, Max N = numberOfRandNumbers 1 indexing
+		"answer": 0,
+		"numberOfRandNumbers": 4
+	}
+}
