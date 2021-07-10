@@ -30,8 +30,8 @@ with Live(text, auto_refresh=False) as live:
         live.update(t, refresh=True)
         if key == keyboard.Key.esc:
             # Stop listener
-            return False
             quit()
+            return False
 
     listener = keyboard.Listener(
         on_press=on_press,
