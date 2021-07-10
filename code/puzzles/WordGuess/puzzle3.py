@@ -1,5 +1,7 @@
 import random
+
 from rich.prompt import Prompt
+
 words = ["pizza", "chicken", "cake"]
 word = random.choice(words)
 hint = ""
@@ -10,7 +12,7 @@ if word == "chicken":
 if word == "cake":
     hint = "What is the most popular food for a birthday party?"
 wrong = True
-while wrong == True:
+while wrong is True:
     ques = Prompt.ask(f"{hint}")
     if ques == word:
         wrong = False
