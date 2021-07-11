@@ -2,7 +2,6 @@ from random import randint
 
 from MultipleChoicePuzzle import MultipleChoicePuzzle
 
-
 class MathPuzzle(MultipleChoicePuzzle):
     """Math Puzzles"""
 

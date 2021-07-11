@@ -1,7 +1,7 @@
 # import time
 
 # # Running Math puzzles is now as easy as just import puzzle1-3 (soon to removet these files)
-import puzzles.Math.puzzle1  # noqa: F401
+import puzzles.MathPuzzle  # noqa: F401
 
 # import puzzles.Math.puzzle2
 # import puzzles.Math.puzzle3
