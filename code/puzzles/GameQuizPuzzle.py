@@ -4,7 +4,7 @@ from TextInputQuestion import TextInputQuestion
 
 
 class GameQuizPuzzle(TextInputQuestion):
-    """Game Quiz Type Puzzles (might merge with Trivia Puzzle) - This is incomplete"""
+    """Game Quiz Type Puzzles - Subclass of TextInputQuestion"""
 
     def __init__(self, choices: list, questions: dict):
         self.choices = choices
