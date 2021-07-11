@@ -34,6 +34,7 @@ class MathPuzzle(MultipleChoicePuzzle):
         self.question = f"What is {num1} {self.operator} {num2}?"
         self.options = opt
         self.answer = num4
+        self.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         super(MultipleChoicePuzzle, self).__init__()
 
 
