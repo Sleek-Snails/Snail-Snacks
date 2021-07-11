@@ -1,9 +1,10 @@
 from rich import box, print
 from rich.console import render_group
-# from rich.layout import Layout
+from rich.layout import Layout
 # from rich.padding import Padding
 from rich.panel import Panel
-
+# from rich.table import Table
+from rich.columns import Columns
 
 class MainMenu:
     """The Main Menu"""
@@ -17,9 +18,14 @@ class MainMenu:
         pass
 
     @render_group()
-    def get_panels(self) -> Panel:
+    def get_panels() -> Panel: # dont add self please, error appears
         """Generator for Panel"""
-        yield Panel('left', width=20, height=10)
+        # using Layout again
+        # yield Layout()
+        yield Columns([Panel("", width=35,height=18) for x in range(3)], equal=True)
+        yield Columns([Panel("", width=35,height=18) for x in range(3)], equal=True)
+        yield Columns([Panel("", width=35,height=18) for x in range(3)], equal=True)
+
 
     def update(self) -> None:
         """Prints new Panels (possibly replace this with a Live Display"""
