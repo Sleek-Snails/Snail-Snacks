@@ -20,12 +20,12 @@ class MultipleChoicePuzzle(Puzzle):
                  question: str = 'What is 1*2', options: list = [2, 4], answer: int = 0,
                  timer: bool = False, timerLength: int = 5
                  ) -> None:
+        super(MultipleChoicePuzzle, self).__init__(timer=timer, timerLength=timerLength)
         self.question = question  # Question
         self.options = options  # List of possible options
         self.answer = answer  # Index of answer in options
         self.passed = None
         self.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        super(MultipleChoicePuzzle, self).__init__(timer=timer, timerLength=timerLength)
 
     @render_group()
     def get_panels(self) -> Panel:
@@ -59,3 +59,7 @@ class MultipleChoicePuzzle(Puzzle):
                 self.keypressHandler.disable()
                 # print('wrong')
                 return True
+
+
+if __name__ == "__main__":
+    MultipleChoicePuzzle().startPuzzle()
