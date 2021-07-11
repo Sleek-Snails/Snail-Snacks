@@ -9,8 +9,9 @@ sys.path.insert(0, parent_dir)
 
 from puzzles.Puzzle import Puzzle  # noqa: E402
 from rich import print  # noqa: E402
-from rich.console import RenderGroup  # noqa: E402
+from rich.console import render_group  # noqa: E402
 from rich.panel import Panel  # noqa: E402
+# from rich.text import Text  # noqa: E402
 from utils.KeyHandler import KeyHandler  # noqa: E402
 
 
@@ -19,24 +20,29 @@ class MultipleChoicePuzzle(Puzzle):
 
     def __init__(self,
                  question: str = 'What is 1*2', options: list = [2, 4], answer: int = 0,
+                 timer: bool = False, timerLength: int = 5
                  ) -> None:
-
         self.question = question  # Question
         self.options = options  # List of possible options
         self.answer = answer  # Index of answer in options
         self.passed = None
+        self.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        super(MultipleChoicePuzzle, self).__init__(timer=timer, timerLength=timerLength)
+
+    @render_group()
+    def get_panels(self) -> Panel:
+        """Generator for panels"""
+        yield Panel(f"{self.question}")
+        yield from [Panel(f"{alph} - {self.options[self.alphabet.find(alph)]}")
+                    for alph in self.alphabet[:len(self.options)]]
 
     def startPuzzle(self) -> bool:
         """Displays and runs puzzle"""
-        panel_group = RenderGroup(
-            Panel(f"{self.question}"),
-            Panel(f"A - {self.options[0]}", style="on blue"),
-            Panel(f"B - {self.options[1]}", style="on red")
-        )
-        print(panel_group)
+        with Puzzle.displayCase as dc:
+            dc.update(self.get_panels(), refresh=True)
 
-        self.thisHere = KeyHandler(self._checkTrue)
-        self.thisHere.enable()
+        self.keypressHandler = KeyHandler(self._checkTrue)
+        self.keypressHandler.enable()
         # print(f"question: {self.question}, options: {self.options}, answer: {self.answer}")
 
         # TODO: Show Timer
@@ -44,24 +50,35 @@ class MultipleChoicePuzzle(Puzzle):
             return self.passed  # Return true if user passed, return false if user failed
 
     def _checkTrue(self, key: str) -> bool:
-        if self.answer == 0:
-            if key == 'a':
+        if key.upper() in self.alphabet[:len(self.options)]:
+            if key.upper() == self.alphabet[self.answer]:
                 self.passed = True
-                self.thisHere.disable()
+                self.keypressHandler.disable()
+                print('right')
                 return False
-
-            if key == 'b':
+            else:
                 self.passed = False
-                self.thisHere.disable()
+                self.keypressHandler.disable()
+                print('wrong')
                 return True
+        # if self.answer == 0:
+        #     if key == 'a':
+        #         self.passed = True
+        #         self.keypressHandler.disable()
+        #         return False
 
-        if self.answer == 1:
-            if key == 'a':
-                self.passed = False
-                self.thisHere.disable()
-                return True
+        #     if key == 'b':
+        #         self.passed = False
+        #         self.keypressHandler.disable()
+        #         return True
 
-            if key == 'b':
-                self.passed = True
-                self.thisHere.disable()
-                return False
+        # if self.answer == 1:
+        #     if key == 'a':
+        #         self.passed = False
+        #         self.keypressHandler.disable()
+        #         return True
+
+        #     if key == 'b':
+        #         self.passed = True
+        #         self.keypressHandler.disable()
+        #         return False

@@ -2,6 +2,8 @@ from random import randint
 
 from MultipleChoicePuzzle import MultipleChoicePuzzle
 
+# from Puzzle import Puzzle
+
 
 class MathPuzzle(MultipleChoicePuzzle):
     """Math Puzzles"""
@@ -34,6 +36,7 @@ class MathPuzzle(MultipleChoicePuzzle):
         self.question = f"What is {num1} {self.operator} {num2}?"
         self.options = opt
         self.answer = num4
+        super(MultipleChoicePuzzle, self).__init__()
 
 
 if __name__ == "__main__":
