@@ -8,10 +8,8 @@ parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir)
 
 from puzzles.Puzzle import Puzzle  # noqa: E402
-from rich import print  # noqa: E402
 from rich.console import render_group  # noqa: E402
 from rich.panel import Panel  # noqa: E402
-# from rich.text import Text  # noqa: E402
 from utils.KeyHandler import KeyHandler  # noqa: E402
 
 
@@ -54,31 +52,10 @@ class MultipleChoicePuzzle(Puzzle):
             if key.upper() == self.alphabet[self.answer]:
                 self.passed = True
                 self.keypressHandler.disable()
-                print('right')
+                # print('right')
                 return False
             else:
                 self.passed = False
                 self.keypressHandler.disable()
-                print('wrong')
+                # print('wrong')
                 return True
-        # if self.answer == 0:
-        #     if key == 'a':
-        #         self.passed = True
-        #         self.keypressHandler.disable()
-        #         return False
-
-        #     if key == 'b':
-        #         self.passed = False
-        #         self.keypressHandler.disable()
-        #         return True
-
-        # if self.answer == 1:
-        #     if key == 'a':
-        #         self.passed = False
-        #         self.keypressHandler.disable()
-        #         return True
-
-        #     if key == 'b':
-        #         self.passed = True
-        #         self.keypressHandler.disable()
-        #         return False

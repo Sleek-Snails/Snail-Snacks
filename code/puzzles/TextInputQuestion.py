@@ -21,3 +21,14 @@ class TextInputQuestion(Puzzle):
         else:
             print("Incorrect!")
             return False
+
+
+if __name__ == "__main__":
+    TextInputQuestion(question="I am both dead and alive; what is my name?",
+                      answer="Schrodinger's cat").startPuzzle()
+
+    TextInputQuestion(question="I share a name with a brand, I made an electifing invention. Who am I?",
+                      answer="Nicola Tesla").startPuzzle()
+
+    TextInputQuestion(question="I'm tall when I'm young, and I'm short when im old. What am I?",
+                      answer="candle").startPuzzle()
