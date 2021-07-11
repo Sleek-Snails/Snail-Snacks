@@ -1,11 +1,9 @@
-from rich import print
-from rich.panel import Panel
-from rich.padding import Padding
-from rich.layout import Layout
-
+from rich import box, print
 from rich.console import render_group
+# from rich.layout import Layout
+# from rich.padding import Padding
+from rich.panel import Panel
 
-from rich import box
 
 class MainMenu:
     """The Main Menu"""
@@ -19,11 +17,14 @@ class MainMenu:
         pass
 
     @render_group()
-    def get_panels():
+    def get_panels(self) -> Panel:
+        """Generator for Panel"""
         yield Panel('left', width=20, height=10)
 
-    def update(self):
+    def update(self) -> None:
+        """Prints new Panels (possibly replace this with a Live Display"""
         print(Panel(MainMenu.get_panels(), box=box.ROUNDED, safe_box=False, width=112, height=56))
+
 
 # test
 main = MainMenu()
