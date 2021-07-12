@@ -17,20 +17,31 @@ class MainMenu:
 
     def __init__(self):
         # rendergroups
+        self.width = 120
+        self.height = 57
         pass
 
     @render_group()
-    def get_panels() -> Panel: # dont add self please, error appears
+    def get_inner_panels(self) -> Columns:
+        """Generator for the get_panels command"""
+        w = (self.width // 3 - 3) // 3 - 2
+        h = (self.height //3 - 2) // 3 - 2
+        yield Columns([Panel(Columns(equal=True), width=w, height=5) for x in range(3)], equal=True)
+        yield Columns([Panel(Columns(equal=True), width=w, height=5) for x in range(3)], equal=True)
+        yield Columns([Panel(Columns(equal=True), width=w, height=5) for x in range(3)], equal=True)
+
+    @render_group()
+    def get_panels(self) -> Columns: # dont add self please, static func, idk what that means but it seems that way
         """Generator for Panel"""
-        # using Layout again
-        # yield Layout()
-        yield Columns([Panel("", width=35,height=18) for x in range(3)], equal=True)
-        yield Columns([Panel("", width=35,height=18) for x in range(3)], equal=True)
-        yield Columns([Panel("", width=35,height=18) for x in range(3)], equal=True)
+        w = self.width // 3 - 3
+        h = self.height // 3 - 1
+        yield Columns([Panel(self.get_inner_panels(), width=w,height=h, box=box.ROUNDED) for x in range(3)], equal=True)
+        yield Columns([Panel(self.get_inner_panels(), width=w,height=h, box=box.ROUNDED) for x in range(3)], equal=True)
+        yield Columns([Panel(self.get_inner_panels(), width=w,height=h, box=box.ROUNDED) for x in range(3)], equal=True)
 
     def update(self, console: Console) -> None:
         """Prints new Panels (possibly replace this with a Live Display"""
-        console.print(Panel(MainMenu.get_panels(), box=box.ROUNDED, safe_box=False, width=112, height=56), justify='center')
+        console.print(Panel(self.get_panels(), box=box.ROUNDED, safe_box=False, width=self.width, height=self.height), justify='center')
 
 
 # test
