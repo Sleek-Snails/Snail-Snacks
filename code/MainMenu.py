@@ -6,6 +6,8 @@ from rich.panel import Panel
 # from rich.table import Table
 from rich.columns import Columns
 
+from rich.console import Console
+
 class MainMenu:
     """The Main Menu"""
 
@@ -26,14 +28,14 @@ class MainMenu:
         yield Columns([Panel("", width=35,height=18) for x in range(3)], equal=True)
         yield Columns([Panel("", width=35,height=18) for x in range(3)], equal=True)
 
-
-    def update(self) -> None:
+    def update(self, console: Console) -> None:
         """Prints new Panels (possibly replace this with a Live Display"""
-        print(Panel(MainMenu.get_panels(), box=box.ROUNDED, safe_box=False, width=112, height=56))
+        console.print(Panel(MainMenu.get_panels(), box=box.ROUNDED, safe_box=False, width=112, height=56), justify='center')
 
 
 # test
+console = Console()
 main = MainMenu()
-main.update()
+main.update(console)
 
 input()
