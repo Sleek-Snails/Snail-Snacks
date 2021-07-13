@@ -1,35 +1,76 @@
+import threading
 from typing import Callable
 
-from pynput import keyboard
+import blessed
 
 
-class KeyHandler:
-    """Class for handling keypresses"""
+class AsyncKeyHandler(threading.Thread):
+    """
+    Non-Blocking KeyPress Handler
 
-    def __init__(self, checkFunc: Callable[[], str]):
-        # Collect events until released
-        self.checkFunc = checkFunc
-        self.listener = keyboard.Listener(on_press=self.on_press,
-                                          on_release=self.on_release,
-                                          suppress=True)
+    Callback should return True to stop KeyHandler
+    """
 
-    def on_press(self, key: keyboard) -> None:
-        """Event handler for keyboard on_press event"""
-        pass
+    def __init__(self, callback: Callable):
+        super(AsyncKeyHandler, self).__init__()
+        self.callback = callback
+        self.term = blessed.Terminal()
+        self._stop_event = threading.Event()
 
-    def on_release(self, key: keyboard) -> bool:
-        """Event handler for keyboard on_release event"""
-        if 'char' in dir(key):
-            if key.char == 'q':
-                self.disable()
-            else:
-                return self.checkFunc(key.char)
+    def run(self) -> bool:
+        """Keypress Handler Logic (Required to be named Run by threading.Thread)"""
+        while not self._stop_event.is_set():
+            with self.term.cbreak():
+                val = ''
+                while val.lower() != 'q':
+                    val = self.term.inkey(timeout=3)
+                    if val.is_sequence:
+                        if self.callback(str(val.name)):
+                            self._stop_event.set()
+                            return False
+                    elif val:
+                        if self.callback(str(val)):
+                            self._stop_event.set()
+                            return False
 
-    def enable(self) -> None:
-        """Start keyboard listener"""
-        with self.listener:
-            self.listener.join()
+    def stop(self) -> None:  # , timeout):
+        """Stop Keypress Handler"""
+        self._stop_event.set()
+        # self.join(timeout)
 
-    def disable(self) -> None:
-        """Stop Keypress listener"""
-        self.listener.stop()
+
+class BlockingKeyHandler:
+    """
+    Blocking KeyPress Handler
+
+    Callback should return True to stop KeyHandler
+    """
+
+    def __init__(self, callback: Callable):
+        self.callback = callback
+        self.pause = False
+        self.term = blessed.Terminal()
+
+    def _process(self) -> bool:
+        while not self.pause:
+            with self.term.cbreak():
+                val = ''
+                while val.lower() != 'q':
+                    val = self.term.inkey(timeout=3)
+                    if val.is_sequence:
+                        if self.callback(str(val.name)):
+                            self.pause = True
+                            return False
+                    elif val:
+                        if self.callback(str(val)):
+                            self.pause = True
+                            return False
+
+    def start(self) -> bool:
+        """Start KeyPress Handler"""
+        self.pause = False
+        return self._process()
+
+    def stop(self) -> None:
+        """Stop KeyPress Handler"""
+        self.pause = True

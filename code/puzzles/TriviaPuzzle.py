@@ -4,7 +4,7 @@ import requests
 from MultipleChoicePuzzle import MultipleChoicePuzzle
 
 
-class Trivia(MultipleChoicePuzzle):
+class TriviaPuzzle(MultipleChoicePuzzle):
     """Trivia Question Class"""
 
     def GetTriviaQuestion(self, amount: int = 1, category: str = None, difficulty: str = None,
@@ -39,8 +39,8 @@ class Trivia(MultipleChoicePuzzle):
         self.question = requestRes[0]
         self.options = requestRes[1]
         self.answer = requestRes[2]
-        super(Trivia, self).startPuzzle()
+        super(TriviaPuzzle, self).startPuzzle()
 
 
 if __name__ == "__main__":
-    Trivia().startPuzzle()
+    TriviaPuzzle().startPuzzle()

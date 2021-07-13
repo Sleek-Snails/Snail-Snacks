@@ -10,7 +10,7 @@ sys.path.insert(0, parent_dir)
 from puzzles.Puzzle import Puzzle  # noqa: E402
 from rich.console import render_group  # noqa: E402
 from rich.panel import Panel  # noqa: E402
-from utils.KeyHandler import KeyHandler  # noqa: E402
+from utils.KeyHandler import BlockingKeyHandler as KeyHandler  # noqa: E402
 
 
 class MultipleChoicePuzzle(Puzzle):
@@ -40,7 +40,7 @@ class MultipleChoicePuzzle(Puzzle):
             dc.update(self.get_panels(), refresh=True)
 
         self.keypressHandler = KeyHandler(self._checkTrue)
-        self.keypressHandler.enable()
+        self.keypressHandler.start()
         # print(f"question: {self.question}, options: {self.options}, answer: {self.answer}")
 
         # TODO: Show Timer
@@ -51,13 +51,15 @@ class MultipleChoicePuzzle(Puzzle):
         if key.upper() in self.alphabet[:len(self.options)]:
             if key.upper() == self.alphabet[self.answer]:
                 self.passed = True
-                self.keypressHandler.disable()
+                self.keypressHandler.stop()
                 # print('right')
-                return False
+                print(key)
+                return True
             else:
                 self.passed = False
-                self.keypressHandler.disable()
-                # print('wrong')
+                self.keypressHandler.stop()
+                print('wrong')
+                print(key)
                 return True
 
 
