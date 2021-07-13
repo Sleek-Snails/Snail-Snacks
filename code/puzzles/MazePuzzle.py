@@ -3,6 +3,14 @@
 from Puzzle import Puzzle
 
 
+class Cell:
+    """A Cell in the maze"""
+
+    def __init__(self):
+        self.rightWall = False
+        self.bottomWall = True
+
+
 class MazePuzzle(Puzzle):
     """Maze puzzle arrows keys"""
 
@@ -12,7 +20,7 @@ class MazePuzzle(Puzzle):
 
     def _emptyMaze(self, width: int, height: int) -> list:
         """Generates list of lists width by height"""
-        return [[[] for x in range(width)] for y in range(height)]
+        return [[Cell() for x in range(width)] for y in range(height)]
 
     def generateMaze(self, width: int = 10, height: int = 10) -> list:
         """Generate Maze list of lists"""
