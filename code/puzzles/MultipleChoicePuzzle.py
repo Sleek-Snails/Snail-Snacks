@@ -1,10 +1,7 @@
-import inspect
 import os
 import sys
 
-# Horrible Hack for local imports :|
-current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-parent_dir = os.path.dirname(current_dir)
+parent_dir = os.path.dirname(os.getcwd())
 sys.path.insert(0, parent_dir)
 
 from puzzles.Puzzle import Puzzle  # noqa: E402
@@ -31,12 +28,13 @@ class MultipleChoicePuzzle(Puzzle):
     def get_panels(self) -> Panel:
         """Generator for panels"""
         yield Panel(f"{self.question}")
-        yield from [Panel(f"{alph} - {self.options[self.alphabet.find(alph)]}")
+        yield from [Panel(f"({alph}) {self.options[self.alphabet.find(alph)]}")
                     for alph in self.alphabet[:len(self.options)]]
 
     def startPuzzle(self) -> bool:
         """Displays and runs puzzle"""
         with Puzzle.displayCase as dc:
+            os.system('cls' if os.name == 'nt' else 'clear')  # noqa: S605
             dc.update(self.get_panels(), refresh=True)
 
         self.keypressHandler = KeyHandler(self._checkTrue)
