@@ -48,7 +48,7 @@ class Laser:
         """Here"""
         return not(height >= self.y >= 0)
 
-    def collision(self, obj: list) -> any:
+    def collision(self, obj: list) -> bool:
         """Here, return type?"""
         return collide(self, obj)
 
