@@ -65,6 +65,8 @@ class BlockingKeyHandler:
                         if self.callback(str(val)):
                             self.pause = True
                             return False
+                self.pause = True
+                return False
 
     def start(self) -> bool:
         """Start KeyPress Handler"""
@@ -74,3 +76,11 @@ class BlockingKeyHandler:
     def stop(self) -> None:
         """Stop KeyPress Handler"""
         self.pause = True
+
+
+if __name__ == "__main__":
+    def testCallback(key: str) -> None:
+        """Test Callback"""
+        print(key)
+
+    BlockingKeyHandler(testCallback).start()

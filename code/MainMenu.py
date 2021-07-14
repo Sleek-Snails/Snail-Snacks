@@ -5,6 +5,7 @@ from rich.console import Console, render_group
 # from rich.layout import Layout
 # from rich.padding import Padding
 from rich.panel import Panel
+from utils.KeyHandler import BlockingKeyHandler as KeyHandler
 
 
 class MainMenu:
@@ -18,7 +19,7 @@ class MainMenu:
         # rendergroups
         self.width = 120
         self.height = 57
-        self.current_selection = [0,2]
+        self.current_selection = [0, 2]
         pass
 
     @render_group()
@@ -44,19 +45,49 @@ class MainMenu:
                 columns.append(Panel(self.get_inner_panels(), width=w, height=h, box=box.ROUNDED, style=style))
             yield Columns(columns, equal=True)
 
-        # yield Columns([Panel(self.get_inner_panels(), width=w,height=h, box=box.ROUNDED) for x in range(3)], equal=True)
-        # yield Columns([Panel(self.get_inner_panels(), width=w,height=h, box=box.ROUNDED) for x in range(3)], equal=True)
-        # yield Columns([Panel(self.get_inner_panels(), width=w,height=h, box=box.ROUNDED) for x in range(3)], equal=True)
+        # yield Columns([Panel(self.get_inner_panels(), width=w,
+        #                height=h, box=box.ROUNDED) for x in range(3)], equal=True)
+        # yield Columns([Panel(self.get_inner_panels(), width=w,
+        #                height=h, box=box.ROUNDED) for x in range(3)], equal=True)
+        # yield Columns([Panel(self.get_inner_panels(), width=w,
+        #                height=h, box=box.ROUNDED) for x in range(3)], equal=True)
 
     def update(self, console: Console) -> None:
         """Prints new Panels (possibly replace this with a Live Display"""
         console.print(Panel(self.get_panels(), box=box.ROUNDED, safe_box=False,
                             width=self.width, height=self.height), justify='center')
 
+    def moveSelection(self, key: str) -> None:
+        """Move selection with up/down/left/right arrow keys"""
+        x = 0
+        y = 0
+
+        if key == "KEY_UP":
+            y -= 1
+        if key == "KEY_DOWN":
+            y += 1
+        if key == "KEY_RIGHT":
+            x += 1
+        if key == "KEY_LEFT":
+            x -= 1
+
+        self.current_selection[0] += x
+        self.current_selection[1] += y
+
+        if self.current_selection[0] < 0 or self.current_selection[0] > 2:
+            self.current_selection[0] = 0
+        if self.current_selection[1] < 0 or self.current_selection[1] > 2:
+            self.current_selection[1] = 0
+
+        self.update(console)
+
 
 # test
 console = Console()
 main = MainMenu()
 main.update(console)
+
+kh = KeyHandler(main.moveSelection)
+kh.start()
 
 input()
