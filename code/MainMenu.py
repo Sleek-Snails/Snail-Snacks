@@ -19,6 +19,7 @@ class MainMenu:
         # rendergroups
         self.width = 120
         self.height = 57
+        self.current_selection = [0,2]
         pass
 
     @render_group()
@@ -35,9 +36,18 @@ class MainMenu:
         """Generator for Panel"""
         w = self.width // 3 - 3
         h = self.height // 3 - 1
-        yield Columns([Panel(self.get_inner_panels(), width=w,height=h, box=box.ROUNDED) for x in range(3)], equal=True)
-        yield Columns([Panel(self.get_inner_panels(), width=w,height=h, box=box.ROUNDED) for x in range(3)], equal=True)
-        yield Columns([Panel(self.get_inner_panels(), width=w,height=h, box=box.ROUNDED) for x in range(3)], equal=True)
+        for y in range(3):
+            columns = []
+            for x in range(3):
+                style = ""
+                if y == self.current_selection[1] and x == self.current_selection[0]:
+                    style = "on red"
+                columns.append(Panel(self.get_inner_panels(), width=w, height=h, box=box.ROUNDED, style=style))
+            yield Columns(columns, equal=True)
+
+        # yield Columns([Panel(self.get_inner_panels(), width=w,height=h, box=box.ROUNDED) for x in range(3)], equal=True)
+        # yield Columns([Panel(self.get_inner_panels(), width=w,height=h, box=box.ROUNDED) for x in range(3)], equal=True)
+        # yield Columns([Panel(self.get_inner_panels(), width=w,height=h, box=box.ROUNDED) for x in range(3)], equal=True)
 
     def update(self, console: Console) -> None:
         """Prints new Panels (possibly replace this with a Live Display"""
