@@ -58,11 +58,11 @@ class BlockingKeyHandler:
                 while val.lower() != 'q':
                     val = self.term.inkey(timeout=3)
                     if val.is_sequence:
-                        if self.callback(str(val.name)):
+                        if self.callback(str(val.name).lower()):
                             self.pause = True
                             return False
                     elif val:
-                        if self.callback(str(val)):
+                        if self.callback(str(val).lower()):
                             self.pause = True
                             return False
                 self.pause = True
