@@ -1,4 +1,4 @@
-from Puzzle import Puzzle  # noqa: E402
+from puzzles.Puzzle import Puzzle  # noqa: E402
 from rich import print  # noqa: E402
 from rich.prompt import Prompt
 
@@ -16,6 +16,7 @@ class TextInputQuestion(Puzzle):
     def startPuzzle(self) -> bool:
         """Displays and runs puzzle"""
         ask = Prompt.ask(f"{self.question}")
+        # ask = input(f"{self.question}")
         if ask == self.answer:
             return True
         else:

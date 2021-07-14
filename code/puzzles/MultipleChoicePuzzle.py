@@ -1,16 +1,13 @@
-import inspect
 import os
 import sys
 
-# Horrible Hack for local imports :|
-current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-parent_dir = os.path.dirname(current_dir)
+parent_dir = os.path.dirname(os.getcwd())
 sys.path.insert(0, parent_dir)
 
 from puzzles.Puzzle import Puzzle  # noqa: E402
 from rich.console import render_group  # noqa: E402
 from rich.panel import Panel  # noqa: E402
-from utils.KeyHandler import KeyHandler  # noqa: E402
+from utils.KeyHandler import BlockingKeyHandler as KeyHandler  # noqa: E402
 
 
 class MultipleChoicePuzzle(Puzzle):
@@ -31,16 +28,17 @@ class MultipleChoicePuzzle(Puzzle):
     def get_panels(self) -> Panel:
         """Generator for panels"""
         yield Panel(f"{self.question}")
-        yield from [Panel(f"{alph} - {self.options[self.alphabet.find(alph)]}")
+        yield from [Panel(f"({alph}) {self.options[self.alphabet.find(alph)]}")
                     for alph in self.alphabet[:len(self.options)]]
 
     def startPuzzle(self) -> bool:
         """Displays and runs puzzle"""
         with Puzzle.displayCase as dc:
+            os.system('cls' if os.name == 'nt' else 'clear')  # noqa: S605
             dc.update(self.get_panels(), refresh=True)
 
         self.keypressHandler = KeyHandler(self._checkTrue)
-        self.keypressHandler.enable()
+        self.keypressHandler.start()
         # print(f"question: {self.question}, options: {self.options}, answer: {self.answer}")
 
         # TODO: Show Timer
@@ -51,13 +49,15 @@ class MultipleChoicePuzzle(Puzzle):
         if key.upper() in self.alphabet[:len(self.options)]:
             if key.upper() == self.alphabet[self.answer]:
                 self.passed = True
-                self.keypressHandler.disable()
+                self.keypressHandler.stop()
                 # print('right')
-                return False
+                print(key)
+                return True
             else:
                 self.passed = False
-                self.keypressHandler.disable()
-                # print('wrong')
+                self.keypressHandler.stop()
+                print('wrong')
+                print(key)
                 return True
 
 

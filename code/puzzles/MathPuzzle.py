@@ -35,6 +35,7 @@ class MathPuzzle(MultipleChoicePuzzle):
         self.options = opt
         self.answer = num4
         self.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        self.passed = False
         super(MultipleChoicePuzzle, self).__init__()
 
 
