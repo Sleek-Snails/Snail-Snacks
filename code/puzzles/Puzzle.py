@@ -1,4 +1,4 @@
-import time
+from time import sleep
 
 # from rich.layout import Layout
 from rich.live import Live
@@ -25,7 +25,7 @@ class Puzzle:
         """Shows rich progress bar for timerLength seconds."""
         if self.timer:
             for n in track(range(self.timerLength), description="Timer"):
-                time.sleep(1)
+                sleep(1)
             return True
         else:
             return False
