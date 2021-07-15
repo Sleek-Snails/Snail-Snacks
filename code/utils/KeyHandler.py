@@ -2,6 +2,7 @@ import threading
 from typing import Callable
 
 import blessed
+from puzzles.Puzzle import Puzzle
 
 
 class AsyncKeyHandler(threading.Thread):
@@ -32,10 +33,14 @@ class AsyncKeyHandler(threading.Thread):
                         if self.callback(str(val)):
                             self._stop_event.set()
                             return False
+                self.stop()
+                Puzzle.displayCase.stop()
+                return False
 
     def stop(self) -> None:  # , timeout):
         """Stop Keypress Handler"""
         self._stop_event.set()
+        Puzzle.displayCase.stop()
         # self.join(timeout)
 
 
@@ -56,7 +61,7 @@ class BlockingKeyHandler:
             with self.term.cbreak():
                 val = ''
                 while val.lower() != 'q':
-                    val = self.term.inkey(timeout=3)
+                    val = self.term.inkey(timeout=0.1)
                     if val.is_sequence:
                         if self.callback(str(val.name)):
                             self.pause = True
@@ -68,7 +73,8 @@ class BlockingKeyHandler:
                             # return False
                             return self.callback(str(val))
                 self.pause = True
-                return False
+                Puzzle.displayCase.stop()
+                return self.callback(str(val))
 
     def start(self) -> bool:
         """Start KeyPress Handler"""
@@ -78,6 +84,7 @@ class BlockingKeyHandler:
     def stop(self) -> None:
         """Stop KeyPress Handler"""
         self.pause = True
+        Puzzle.displayCase.stop()
 
 
 if __name__ == "__main__":
