@@ -18,8 +18,8 @@ class MainMenu:
         # rendergroups
         self.width = 120
         self.height = 57
-        self.current_selection = [0,2]
-        pass
+        self.current_selection = [0,2] # the selection tool we can change
+        # just print out the information again after changing the selection
 
     @render_group()
     def get_inner_panels(self) -> Columns:
