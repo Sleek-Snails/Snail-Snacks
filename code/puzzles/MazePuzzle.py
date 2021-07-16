@@ -1,5 +1,7 @@
 # import rich
 
+import random
+
 from Puzzle import Puzzle
 
 
@@ -7,8 +9,38 @@ class Cell:
     """A Cell in the maze"""
 
     def __init__(self):
-        self.rightWall = False
+        self.rightWall = True
         self.bottomWall = True
+
+    def __repr__(self):
+        out = ""
+        if self.rightWall and self.bottomWall:
+            out += "┌───┐\n"
+            out += "│   │\n"
+            out += "└───┘\n"
+            return out
+        elif self.rightWall:
+            return " │"
+        elif self.bottomWall:
+            return "──"
+        else:
+            return "  "
+
+        # return "#"
+    def __str__(self):
+        out = ""
+        if self.rightWall and self.bottomWall:
+            # return "─┘"
+            out += "┌───┐\n"
+            out += "│   │\n"
+            out += "└───┘\n"
+            return out
+        elif self.rightWall:
+            return " │"
+        elif self.bottomWall:
+            return "──"
+        else:
+            return "  "
 
 
 class MazePuzzle(Puzzle):
@@ -24,8 +56,12 @@ class MazePuzzle(Puzzle):
 
     def generateMaze(self, width: int = 10, height: int = 10) -> list:
         """Generate Maze list of lists"""
-        for x in self._emptyMaze(width=width, height=height):
-            print(x)
+        for y in self._emptyMaze(width=width, height=height):
+            for x in y:
+                x.rightWall = random.choice([True, False])
+                x.bottomWall = random.choice([True, False])
+                print(x, end="")
+            print("")
 
 
 MazePuzzle().generateMaze()

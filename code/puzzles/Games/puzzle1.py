@@ -27,23 +27,26 @@ font_style = pygame.font.SysFont("Arial", 25)
 score_font = pygame.font.SysFont("Arial", 20)
 
 
-def Your_score(score):
+def your_score(score: int) -> None:
+    """Display the players score"""
     value = score_font.render("Score: " + str(score), True, yellow)
     dis.blit(value, [0, 0])
 
 
-
-def our_snake(snake_block, snake_list):
+def our_snake(snake_block: int, snake_list: list) -> None:
+    """Draw the snakes body"""
     for x in snake_list:
         pygame.draw.rect(dis, black, [x[0], x[1], snake_block, snake_block])
 
 
-def message(msg, color):
+def message(msg: str, color: tuple) -> None:
+    """Display the snake message"""
     mesg = font_style.render(msg, True, color)
     dis.blit(mesg, [dis_width / 6, dis_height / 3])
 
 
-def gameLoop():
+def game_loop() -> None:
+    """Run the main loop of the snake game"""
     game_over = False
     game_close = False
 
@@ -59,12 +62,12 @@ def gameLoop():
     foodx = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0
     foody = round(random.randrange(0, dis_height - snake_block) / 10.0) * 10.0
 
-    while game_over == False:
+    while game_over is False:
 
-        while game_close == True:
+        while game_close is True:
             dis.fill(blue)
             message("You Lost! Press P-Play Again or Q-Quit", red)
-            Your_score(Length_of_snake - 1)
+            your_score(Length_of_snake - 1)
             pygame.display.update()
 
             for event in pygame.event.get():
@@ -73,7 +76,7 @@ def gameLoop():
                         game_over = True
                         game_close = False
                     if event.key == pygame.K_p:
-                        gameLoop()
+                        game_loop()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -122,7 +125,7 @@ def gameLoop():
                 game_close = True
 
         our_snake(snake_block, snake_List)
-        Your_score(Length_of_snake - 1)
+        your_score(Length_of_snake - 1)
 
         pygame.display.update()
 
@@ -140,4 +143,5 @@ def gameLoop():
             print("You won!")
             time.sleep(2)
 
-gameLoop()
+
+game_loop()

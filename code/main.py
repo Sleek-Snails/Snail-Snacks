@@ -1,7 +1,19 @@
 # import time
 
 # # Running Math puzzles is now as easy as just import puzzle1-3 (soon to removet these files)
-import puzzles.MathPuzzle  # noqa: F401
+from puzzles.TextInputQuestion import TextInputQuestion  # noqa: F401
+
+TextInputQuestion(question="I am both dead and alive; what is my name?",
+                  answer="Schrodinger's cat",
+                  timer=5).startPuzzle()
+
+TextInputQuestion(question="I share a name with a brand, I made an electifing invention. Who am I?",
+                  answer="Nicola Tesla",
+                  timer=10).startPuzzle()
+
+TextInputQuestion(question="I'm tall when I'm young, and I'm short when im old. What am I?",
+                  answer="candle",
+                  timer=15).startPuzzle()
 
 # import puzzles.Math.puzzle2
 # import puzzles.Math.puzzle3
