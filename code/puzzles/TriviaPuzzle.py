@@ -1,7 +1,7 @@
 import random
 
 import requests
-from MultipleChoicePuzzle import MultipleChoicePuzzle
+from .MultipleChoicePuzzle import MultipleChoicePuzzle
 
 
 class TriviaPuzzle(MultipleChoicePuzzle):

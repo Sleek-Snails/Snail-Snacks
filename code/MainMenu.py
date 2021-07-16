@@ -8,6 +8,12 @@ from rich.console import Console, render_group
 from rich.panel import Panel
 from utils.KeyHandler import BlockingKeyHandler as KeyHandler
 
+# random
+from random import randint
+
+# import all of the game stuff
+from puzzles import GameQuizPuzzle, MathPuzzle, MazePuzzle, MultipleChoicePuzzle, TriviaPuzzle
+
 
 class MainMenu(Puzzle):
     """The Main Menu"""
@@ -22,6 +28,8 @@ class MainMenu(Puzzle):
         self.height = 57
         self.current_selection = [0,0] # the selection tool we can change
         # just print out the information again after changing the selection
+
+        self.types = [GameQuizPuzzle.GameQuizPuzzle, MathPuzzle.MathPuzzle, MazePuzzle.MazePuzzle, MultipleChoicePuzzle.MultipleChoicePuzzle, TriviaPuzzle.TriviaPuzzle]
 
     @render_group()
     def get_inner_panels(self) -> Columns:
@@ -57,11 +65,22 @@ class MainMenu(Puzzle):
         """Prints new Panels (possibly replace this with a Live Display)"""
         console.print(Panel(self.get_panels(), box=box.ROUNDED, safe_box=False,
                             width=self.width, height=self.height), justify='center')
+    
+    def select_game(self):
+        """Starts a random game"""
+        # index = randint(len(self.types))
+        # question = self.types[index]
+        # self.questions.pop(index)
+        # question.__call__.puzzles
+        print(self.types[0].__call__.puzzles[0])
+        pass
 
     def moveSelection(self, key: str) -> None:
         """Move selection with up/down/left/right arrow keys"""
         x = 0
         y = 0
+
+        print(key)
 
         if key == "KEY_UP":
             y -= 1
@@ -71,6 +90,8 @@ class MainMenu(Puzzle):
             x -= 1
         if key == "KEY_RIGHT":
             x += 1
+        if key == "KEY_ENTER":
+            self.select_game()
 
         self.current_selection[0] += x
         self.current_selection[1] += y
@@ -85,6 +106,7 @@ class MainMenu(Puzzle):
         if self.current_selection[1] > 2:
             self.current_selection[1] = 0
 
+        print('(q) exit')
         self.update(console)
 
 
@@ -93,7 +115,6 @@ console = Console()
 main = MainMenu()
 main.update(console)
 
-print('(q) exit')
 kh = KeyHandler(main.moveSelection)
 kh.start()
 

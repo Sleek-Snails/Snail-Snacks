@@ -1,6 +1,6 @@
 from random import randint
 
-from MultipleChoicePuzzle import MultipleChoicePuzzle
+from .MultipleChoicePuzzle import MultipleChoicePuzzle
 
 
 class MathPuzzle(MultipleChoicePuzzle):

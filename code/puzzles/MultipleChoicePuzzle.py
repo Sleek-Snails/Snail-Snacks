@@ -4,7 +4,7 @@ import sys
 parent_dir = os.path.dirname(os.getcwd())
 sys.path.insert(0, parent_dir)
 
-from puzzles.Puzzle import Puzzle  # noqa: E402
+from .Puzzle import Puzzle  # noqa: E402
 from rich.console import render_group  # noqa: E402
 from rich.panel import Panel  # noqa: E402
 from utils.KeyHandler import BlockingKeyHandler as KeyHandler  # noqa: E402

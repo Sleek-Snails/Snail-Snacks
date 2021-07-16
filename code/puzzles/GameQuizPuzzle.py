@@ -1,10 +1,26 @@
 import random
 
-from TextInputQuestion import TextInputQuestion
+from .TextInputQuestion import TextInputQuestion
 
 
 class GameQuizPuzzle(TextInputQuestion):
     """Game Quiz Type Puzzles - Subclass of TextInputQuestion"""
+
+    """ questions"""
+    puzzles = [
+            [["Barney", "Gordon", "Eli"], {"Barney": "Who is the security gaurd who follows you throughout Half-Life?(First Name Only)",
+            "Gordon": "Who is the main character of Half-Life?(First Name Only)",
+            "Eli": "Who is Alyx's father?(First Name Only)"}],
+
+            [["Barney", "Gordon", "Eli"], {
+            "Barney": "Who is the security gaurd who follows you throughout Half-Life?(First Name Only)",
+            "Gordon": "Who is the main character of Half-Life?(First Name Only)",
+            "Eli": "Who is Alyx's father?(First Name Only)"}],
+
+            [["GladOS", "Chell", "Cave Johnson"], {"GladOS": "Who runs the facility in portal",
+            "Chell": "Who is the main character of Portal? (First Name Only)",
+            "Cave Johnson": "Who was the CEO of Aperture Science? (Full name)"}]
+    ]
 
     def __init__(self, choices: list, questions: dict):
         self.choices = choices
@@ -19,6 +35,7 @@ class GameQuizPuzzle(TextInputQuestion):
             if super(GameQuizPuzzle, self).startPuzzle() is False:
                 return False
         return True
+
 
 
 if __name__ == "__main__":

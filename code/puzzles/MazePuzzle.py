@@ -2,7 +2,7 @@
 
 import random
 
-from Puzzle import Puzzle
+from .Puzzle import Puzzle
 
 
 class Cell:
