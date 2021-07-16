@@ -26,6 +26,7 @@ class GameQuizPuzzle(TextInputQuestion):
         self.choices = choices
         self.questions = questions
         self.timer = False
+        self.passed = False
 
     def startPuzzle(self) -> None:
         """Start Puzzle"""

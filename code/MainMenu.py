@@ -31,6 +31,7 @@ class MainMenu(Puzzle):
 
         self.types = [GameQuizPuzzle.GameQuizPuzzle, MathPuzzle.MathPuzzle, MultipleChoicePuzzle.MultipleChoicePuzzle, TriviaPuzzle.TriviaPuzzle]
         self.ingame = False
+        self.score = 0
 
     @render_group()
     def get_inner_panels(self) -> Columns:
@@ -76,6 +77,7 @@ class MainMenu(Puzzle):
         puzzle_data = self.types[0].puzzles[randint(0,2)]
         q = self.types[0](puzzle_data[0], puzzle_data[1])
         q.startPuzzle()
+        self.ingame = False
 
     def moveSelection(self, key: str) -> None:
         """Move selection with up/down/left/right arrow keys"""
@@ -93,8 +95,8 @@ class MainMenu(Puzzle):
         if key == "KEY_RIGHT":
             x += 1
         if key == "KEY_ENTER":
-            self.select_game()
             self.ingame = True
+            self.select_game()
 
         self.current_selection[0] += x
         self.current_selection[1] += y

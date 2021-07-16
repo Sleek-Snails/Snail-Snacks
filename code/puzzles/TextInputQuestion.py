@@ -105,7 +105,6 @@ class TextInputQuestion(Puzzle):
         if self.passed is not True:
             self.kh.stop()
             Puzzle.displayCase.stop()
-            print("Hmm")
             return False
 
 
