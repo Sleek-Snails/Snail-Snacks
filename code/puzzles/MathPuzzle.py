@@ -6,7 +6,11 @@ from .MultipleChoicePuzzle import MultipleChoicePuzzle
 class MathPuzzle(MultipleChoicePuzzle):
     """Math Puzzles"""
 
-    def __init__(self, operator: str):
+    puzzles = [
+        ["/", ''],["*",''],["+",'']
+    ]
+
+    def __init__(self, operator: str, placeholder: str):
         self.operator = operator
         num1 = randint(1, 10)
         num2 = randint(1, 10)
@@ -22,7 +26,7 @@ class MathPuzzle(MultipleChoicePuzzle):
         elif self.operator == "-":
             ans = num1 - num2
             wro = num1 - num3
-        elif self.operator == "+":
+        else:
             ans = num1 + num2
             wro = num1 + num3
 

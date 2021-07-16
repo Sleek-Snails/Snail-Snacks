@@ -18,8 +18,13 @@ from utils.KeyHandler import BlockingKeyHandler as KeyHandler
 
 class TextInputQuestion(Puzzle):
     """Multiple Choice Question Class"""
+    puzzles = [
+        ["I am both dead and alive; what is my name?", "Schrodinger's cat"],
+        ["I share a name with a brand, I made an electifing invention. Who am I?", "Nicola Tesla"],
+        ["I'm tall when I'm young, and I'm short when im old. What am I?", "Nicola Tesla"]
+    ]
 
-    def __init__(self, question: str = 'What is 1*2', answer: str = "2", timer: int = None) -> None:
+    def __init__(self, question: str = 'What is 1*2', answer: str = "2", timer: int = 10) -> None: # just set default timer to 10 because the lsits thing is now complicated
         self.question = question  # Question
         self.answer = answer  # Index of answer in options
         self.current_text = ""

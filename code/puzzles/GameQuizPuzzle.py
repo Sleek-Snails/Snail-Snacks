@@ -8,9 +8,9 @@ class GameQuizPuzzle(TextInputQuestion):
 
     """ questions"""
     puzzles = [
-            [["Barney", "Gordon", "Eli"], {"Barney": "Who is the security gaurd who follows you throughout Half-Life?(First Name Only)",
-            "Gordon": "Who is the main character of Half-Life?(First Name Only)",
-            "Eli": "Who is Alyx's father?(First Name Only)"}],
+            [["doom", "half-life", "portal"], {        "doom": "What game sparked the First Person Shooter endustry?",
+        "half-life": "What game was the most popular story game of the 1990s?",
+        "portal": "Which game used portals to proceed to different levels?"}],
 
             [["Barney", "Gordon", "Eli"], {
             "Barney": "Who is the security gaurd who follows you throughout Half-Life?(First Name Only)",
@@ -19,7 +19,26 @@ class GameQuizPuzzle(TextInputQuestion):
 
             [["GladOS", "Chell", "Cave Johnson"], {"GladOS": "Who runs the facility in portal",
             "Chell": "Who is the main character of Portal? (First Name Only)",
-            "Cave Johnson": "Who was the CEO of Aperture Science? (Full name)"}]
+            "Cave Johnson": "Who was the CEO of Aperture Science? (Full name)"}],
+
+            [["Pikachu", "Pallet Town", "Kanto"],
+            {"Pikachu": "Who is Ash Kethcum's iconic partner in Pokemon?",
+            "Pallet Town": "Where did Ash Ketchum start his grand journey to become the Pokemon master?",
+            "Kanto": "What region did Ash Ketchum start in?"}]
+
+            [['1', '100', '3628800'],
+            {
+                '1': "What is 2 - 1?",
+                '100': "What is 10^2?",
+                '3628800': "What is 10!"
+            }],
+
+            [['mitochondria', 'chlorophyll', 'ATP'],
+            {
+                'mitochondria' : "What is the powerhouse of a cell?",
+                "chlorophyll" : "What makes a plants leaves green?",
+                "ATP" : "What molecule in our body stores energy for us to use? (Abreviated form please)"
+            }]
     ]
 
     def __init__(self, choices: list, questions: dict):
