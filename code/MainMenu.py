@@ -76,8 +76,12 @@ class MainMenu(Puzzle):
         # test
         puzzle_data = self.types[0].puzzles[randint(0,2)]
         q = self.types[0](puzzle_data[0], puzzle_data[1])
-        q.startPuzzle()
+        v = q.startPuzzle()
+        print(v)
+        if v:
+            self.score += 1
         self.ingame = False
+        print(self.score)
 
     def moveSelection(self, key: str) -> None:
         """Move selection with up/down/left/right arrow keys"""

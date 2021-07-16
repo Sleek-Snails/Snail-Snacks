@@ -65,7 +65,9 @@ class TextInputQuestion(Puzzle):
         self.kh = KeyHandler(self._callback)
         ask = self.kh.start()
 
-        if str(ask).lower() == f"Answer: {str(self.answer).lower()}":
+        print(ask.strip().lower())
+
+        if str(ask).strip().lower() == f"Answer: {str(self.answer).lower()}".strip().lower():
             Puzzle.displayCase.stop()
             self.passed = True
             return True

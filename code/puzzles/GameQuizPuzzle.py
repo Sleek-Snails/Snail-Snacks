@@ -39,7 +39,6 @@ class GameQuizPuzzle(TextInputQuestion):
         return True
 
 
-
 if __name__ == "__main__":
     print("puzzle1")
     GameQuizPuzzle(choices=["doom", "half-life", "portal"], questions={
