@@ -12,7 +12,7 @@ from utils.KeyHandler import BlockingKeyHandler as KeyHandler
 from random import randint
 
 # import all of the game stuff
-from puzzles import GameQuizPuzzle, MathPuzzle, MazePuzzle, MultipleChoicePuzzle, TriviaPuzzle
+from puzzles import GameQuizPuzzle, MathPuzzle, MultipleChoicePuzzle, TriviaPuzzle
 
 
 class MainMenu(Puzzle):
@@ -29,7 +29,8 @@ class MainMenu(Puzzle):
         self.current_selection = [0,0] # the selection tool we can change
         # just print out the information again after changing the selection
 
-        self.types = [GameQuizPuzzle.GameQuizPuzzle, MathPuzzle.MathPuzzle, MazePuzzle.MazePuzzle, MultipleChoicePuzzle.MultipleChoicePuzzle, TriviaPuzzle.TriviaPuzzle]
+        self.types = [GameQuizPuzzle.GameQuizPuzzle, MathPuzzle.MathPuzzle, MultipleChoicePuzzle.MultipleChoicePuzzle, TriviaPuzzle.TriviaPuzzle]
+        self.ingame = False
 
     @render_group()
     def get_inner_panels(self) -> Columns:
@@ -68,19 +69,20 @@ class MainMenu(Puzzle):
     
     def select_game(self):
         """Starts a random game"""
-        # index = randint(len(self.types))
-        # question = self.types[index]
-        # self.questions.pop(index)
-        # question.__call__.puzzles
-        print(self.types[0].__call__.puzzles[0])
-        pass
+        index = randint(0,len(self.types)-1)
+        question = self.types[index]
+        
+        # test
+        puzzle_data = self.types[0].puzzles[randint(0,2)]
+        q = self.types[0](puzzle_data[0], puzzle_data[1])
+        q.startPuzzle()
 
     def moveSelection(self, key: str) -> None:
         """Move selection with up/down/left/right arrow keys"""
+        if self.ingame:
+            return
         x = 0
         y = 0
-
-        print(key)
 
         if key == "KEY_UP":
             y -= 1
@@ -92,6 +94,7 @@ class MainMenu(Puzzle):
             x += 1
         if key == "KEY_ENTER":
             self.select_game()
+            self.ingame = True
 
         self.current_selection[0] += x
         self.current_selection[1] += y
