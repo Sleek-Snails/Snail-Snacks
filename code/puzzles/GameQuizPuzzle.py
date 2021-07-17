@@ -24,7 +24,7 @@ class GameQuizPuzzle(TextInputQuestion):
             [["Pikachu", "Pallet Town", "Kanto"],
             {"Pikachu": "Who is Ash Kethcum's iconic partner in Pokemon?",
             "Pallet Town": "Where did Ash Ketchum start his grand journey to become the Pokemon master?",
-            "Kanto": "What region did Ash Ketchum start in?"}]
+            "Kanto": "What region did Ash Ketchum start in?"}],
 
             [['1', '100', '3628800'],
             {
@@ -44,7 +44,7 @@ class GameQuizPuzzle(TextInputQuestion):
     def __init__(self, choices: list, questions: dict):
         self.choices = choices
         self.questions = questions
-        self.timer = False
+        self.timer = 10
         self.passed = False
 
     def startPuzzle(self) -> None:
