@@ -8,7 +8,7 @@
 4. `cd code`
 5. `python MainMenu.py`
 
-
+Press enter to select. Arrow keys to move
 ## Setup Dev enviroment
 
 #### Download Repository & Switch into directory
