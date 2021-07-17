@@ -82,7 +82,7 @@ class MainMenu(Puzzle):
         if v:
             self.score += 1
         self.ingame = False
-        if self.score >= 6:
+        if self.score >= 5:
             print("You win!!!")
             quit()
         self.counter += 1
@@ -120,7 +120,7 @@ class MainMenu(Puzzle):
             self.current_selection[1] = 0
 
         print('(q) exit')
-        print(f"Your score is: {self.score}")
+        print(f"Your score is: {self.score}\n5 points to win!")
         self.update(console)
 
 
