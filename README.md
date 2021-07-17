@@ -1,5 +1,14 @@
 # Python Discord Code Jam Sleek Snails
 
+# Install & Running Instructions
+
+1. `git clone https://github.com/Sleek-Snails/Snail-Snacks.git`
+2. `cd Snail-Snacks`
+3. `pip install -r dev-requirements.txt`
+4. `cd code`
+5. `python MainMenu.py`
+
+
 ## Setup Dev enviroment
 
 #### Download Repository & Switch into directory
