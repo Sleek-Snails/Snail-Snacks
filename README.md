@@ -8,7 +8,14 @@
 4. `cd code`
 5. `python MainMenu.py`
 
-Press enter to select. Arrow keys to move
+## Usage and Play
+
+To play the game you will use the arrow keys to navigate the boxes.
+You can select a box by pressing enter.
+Once inside the box you will have to answer a question within a time limit displayed above the question.
+Type your answer and hit enter to submit or `q` to quit the game.
+Once you get 5 correct you win!
+
 ## Setup Dev enviroment
 
 #### Download Repository & Switch into directory
